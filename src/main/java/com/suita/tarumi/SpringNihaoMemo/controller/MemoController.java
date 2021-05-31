@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-@CrossOrigin(origins = "http://angularnihaomemo.s3-website-ap-northeast-1.amazonaws.com")
 //@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://www.nihaomemo.com")
 @RestController
 public class MemoController {
     @Autowired
