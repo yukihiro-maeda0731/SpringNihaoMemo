@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Sort;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -65,7 +66,7 @@ public class MemoController {
      */
     @GetMapping("/")
     public Iterable<Memo> getMemos() throws IOException {
-        return memoRepository.findAll();
+        return memoRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     /**
@@ -75,4 +76,5 @@ public class MemoController {
     public void deleteMemo(@PathVariable("id") Long id){
         memoRepository.deleteById(id);
     }
+
 }
