@@ -9,6 +9,8 @@ import com.amazonaws.services.translate.model.TranslateTextResult;
 import com.suita.tarumi.SpringNihaoMemo.model.Memo;
 import com.suita.tarumi.SpringNihaoMemo.repository.MemoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,11 +64,11 @@ public class MemoController {
     }
 
     /**
-     * 全てのメモを取得
+     * メモをページに応じて取得
      */
-    @GetMapping("/")
-    public Iterable<Memo> getMemos() throws IOException {
-        return memoRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+    @GetMapping("/{page}")
+    public Page<Memo> getMemos(@PathVariable("page") int page) throws IOException {
+        return memoRepository.findAll(PageRequest.of(page,10,Sort.by(Sort.Direction.ASC, "id")));
     }
 
     /**
